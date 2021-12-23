@@ -9,14 +9,13 @@ import (
 )
 
 type (
-	// Args is the type for arguments to the function.
-	// We support one int value for now.
-	Args = int
+	// Arg is an integral type that corresponds to a machine register.
+	Arg = uintptr
 
 	// Result is the type for return values.
 	Result = int
 
-	Callable = func(Args) Result
+	Callable = func(Arg) Result
 )
 
 type MachineCode struct {
@@ -54,7 +53,7 @@ func (m *MachineCode) mmap() error {
 	return nil
 }
 
-func (m *MachineCode) Execute(args Args) (Result, error) {
+func (m *MachineCode) Execute(arg Arg) (Result, error) {
 	if m.funcPtr == nil {
 		if err := m.mmap(); err != nil {
 			return 0, errors.Trace(err)
@@ -63,7 +62,7 @@ func (m *MachineCode) Execute(args Args) (Result, error) {
 
 	unsafeFunc := (uintptr)(unsafe.Pointer(&m.funcPtr))
 	executablePtr := *(*Callable)(unsafe.Pointer(&unsafeFunc))
-	ret := executablePtr(args)
+	ret := executablePtr(arg)
 
 	return ret, nil
 }
