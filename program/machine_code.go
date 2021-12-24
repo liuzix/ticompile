@@ -66,3 +66,14 @@ func (m *MachineCode) Execute(arg Arg) (Result, error) {
 
 	return ret, nil
 }
+
+func (m *MachineCode) Release() error {
+	if m.funcPtr == nil {
+		return nil
+	}
+
+	if err := syscall.Munmap(m.funcPtr); err != nil {
+		return errors.Trace(err)
+	}
+	return nil
+}

@@ -14,7 +14,15 @@ var addFunction = []byte{
 
 func TestMachineCodeAddFunc(t *testing.T) {
 	code := NewMachineCode(addFunction)
-	result, err := code.Execute(5)
-	require.NoError(t, err)
-	require.Equal(t, 6, result)
+	defer func() {
+		err := code.Release()
+		require.NoError(t, err)
+	}()
+
+	for i := 0; i < 5; i++ {
+		// Run multiple times
+		result, err := code.Execute(5)
+		require.NoError(t, err)
+		require.Equal(t, 6, result)
+	}
 }
