@@ -75,5 +75,6 @@ func (m *MachineCode) Release() error {
 	if err := syscall.Munmap(m.funcPtr); err != nil {
 		return errors.Trace(err)
 	}
+	m.funcPtr = nil
 	return nil
 }
