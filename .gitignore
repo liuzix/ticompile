@@ -15,3 +15,14 @@
 # vendor/
 tools/bin
 .idea
+cpp/Makefile
+cpp/cmake-build-debug
+cpp/cmake-build-debug-coverage
+cpp/Testing
+cpp/cmake_install.cmake
+cpp/CMakeCache.txt
+cpp/CTestTestfile.cmake
+llvm_bridge_test
+libllvm_bridge.a
+*.cbp
+CMakeFiles
