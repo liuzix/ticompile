@@ -9,7 +9,6 @@
 #include <spdlog/spdlog.h>
 
 using namespace llvm;
-using namespace llvm::orc;
 
 #define JIT_FUNC_NAME "jit_main"
 
@@ -18,12 +17,12 @@ struct GlobalStates {
     ThreadSafeContext ctx;
 
     GlobalStates()
+        : ctx(std::make_unique<LLVMContext>())
     {
         spdlog::info("llvm_bridge: initializing library");
-        // Note that InitializeNativeTarget returns **false** on success.
-        if (InitializeNativeTarget()) {
-            spdlog::error("llvm_bridge: fail to initialize target");
-        }
+        llvm::InitializeNativeTarget();
+        llvm::InitializeNativeTargetAsmPrinter();
+        llvm::InitializeNativeTargetAsmParser();
 
         jit = cantFail(TiJIT::Create());
     }
@@ -37,9 +36,19 @@ extern "C" void* compileLLVMIR(const char* ir, size_t len)
     auto module = makeModuleFromMemoryBuffer(*global.ctx.getContext(), memBuf->getMemBufferRef());
     module->setDataLayout(global.jit->getDataLayout());
     auto jitMain = module->getFunction(JIT_FUNC_NAME);
-    jitMain->setName(generateFreshJITSymbolName());
+
+    const std::string jitSymbolName = generateFreshJITSymbolName();
+    jitMain->setName(jitSymbolName);
 
     global.jit->addModule(std::move(module));
-    auto sym = cantFail(global.jit->lookup("test"));
-    // sym.getAddress()
+    auto sym = global.jit->lookup(jitSymbolName);
+    if (!sym) {
+        spdlog::error("llvm_bridge: JIT look up symbol {} failed: {}",
+            jitSymbolName, toString(sym.takeError()));
+        return nullptr;
+    }
+
+    spdlog::debug("llvm_bridge: JIT compilation finished. Symbol name: {}, address: {}",
+        jitSymbolName, (uint64_t)sym->getAddress());
+    return (void*)sym->getAddress();
 }
