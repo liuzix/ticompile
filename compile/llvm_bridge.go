@@ -12,12 +12,26 @@ import (
 	"unsafe"
 
 	"github.com/liuzix/ticompile/program"
+	"github.com/pingcap/errors"
+	"github.com/pingcap/log"
+	"go.uber.org/zap"
 )
 
-func CompileBitcode(bitcode []byte) *program.MachineCode {
+func LLVMCompileIR(bitcode []byte) func(arg program.Arg) (program.Result, error) {
 	buf := C.CString(string(bitcode))
 	defer C.free(unsafe.Pointer(buf))
-	_ = C.compileLLVMIR(buf, C.size_t(len(bitcode)))
 
-	return nil
+	rawFuncPtr := uintptr(C.compileLLVMIR(buf, C.size_t(len(bitcode))))
+	if rawFuncPtr == 0 {
+		log.Panic("compileLLVMIR failed",
+			zap.Binary("bitcode", bitcode))
+	}
+
+	return func(arg program.Arg) (program.Result, error) {
+		result, err := CallTrampoline(rawFuncPtr, arg)
+		if err != nil {
+			return 0, errors.Trace(err)
+		}
+		return result, nil
+	}
 }
