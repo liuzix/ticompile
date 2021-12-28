@@ -24,7 +24,7 @@ func TestAMD64ConvertToGoABI(t *testing.T) {
 	err := abi.ConvertToGoABI(code)
 	require.NoError(t, err)
 
-	result, err := code.Execute(10)
+	result, err := code.Execute(10, 0)
 	require.NoError(t, err)
-	require.Equal(t, 11, result)
+	require.Equal(t, Result(11), result)
 }

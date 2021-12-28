@@ -13,9 +13,9 @@ type (
 	Arg = uintptr
 
 	// Result is the type for return values.
-	Result = int
+	Result = uintptr
 
-	Callable = func(Arg) Result
+	Callable = func(Arg, Arg) Result
 )
 
 type MachineCode struct {
@@ -53,7 +53,7 @@ func (m *MachineCode) mmap() error {
 	return nil
 }
 
-func (m *MachineCode) Execute(arg Arg) (Result, error) {
+func (m *MachineCode) Execute(arg0, arg1 Arg) (Result, error) {
 	if m.funcPtr == nil {
 		if err := m.mmap(); err != nil {
 			return 0, errors.Trace(err)
@@ -62,7 +62,7 @@ func (m *MachineCode) Execute(arg Arg) (Result, error) {
 
 	unsafeFunc := (uintptr)(unsafe.Pointer(&m.funcPtr))
 	executablePtr := *(*Callable)(unsafe.Pointer(&unsafeFunc))
-	ret := executablePtr(arg)
+	ret := executablePtr(arg0, arg1)
 
 	return ret, nil
 }
@@ -77,4 +77,14 @@ func (m *MachineCode) Release() error {
 	}
 	m.funcPtr = nil
 	return nil
+}
+
+func (m *MachineCode) RawFuncPtr() (uintptr, error) {
+	if m.funcPtr == nil {
+		if err := m.mmap(); err != nil {
+			return 0, errors.Trace(err)
+		}
+	}
+
+	return uintptr(unsafe.Pointer(&m.funcPtr[0])), nil
 }

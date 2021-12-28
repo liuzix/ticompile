@@ -21,7 +21,7 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
-add_library(llvm_bridge STATIC llvm_bridge.cpp helpers.cpp helpers.h TiJIT.h)
+add_library(llvm_bridge SHARED llvm_bridge.cpp helpers.cpp helpers.h TiJIT.h)
 target_link_libraries(llvm_bridge PUBLIC ${llvm_libs} spdlog::spdlog)
 
 add_executable(llvm_bridge_test helpers_test.cpp TiJIT_test.cpp llvm_bridge_test.cpp)
