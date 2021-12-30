@@ -17,7 +17,9 @@ import (
 	"go.uber.org/zap"
 )
 
-func LLVMCompileIR(bitcode []byte) func(arg program.Arg) (program.Result, error) {
+type CompiledFunction = func(arg program.Arg) (program.Result, error)
+
+func LLVMCompileIR(bitcode []byte) CompiledFunction {
 	buf := C.CString(string(bitcode))
 	defer C.free(unsafe.Pointer(buf))
 
