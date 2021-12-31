@@ -28,6 +28,7 @@ func LLVMCompileIR(bitcode []byte) CompiledFunction {
 		log.Panic("compileLLVMIR failed",
 			zap.Binary("bitcode", bitcode))
 	}
+	log.Info("LLVM JIT returned function ptr", zap.Uintptr("ptr", rawFuncPtr))
 
 	return func(arg program.Arg) (program.Result, error) {
 		result, err := CallTrampoline(rawFuncPtr, arg)

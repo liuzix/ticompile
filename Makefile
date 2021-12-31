@@ -4,10 +4,13 @@ FAIL_ON_STDOUT := awk '{ print  } END { if (NR > 0) { exit 1  }  }'
 
 PACKAGE_LIST := go list ./...
 PACKAGES := $$($(PACKAGE_LIST))
-GOFILES := $$(find . -name '*.go' -type f)
+GOFILES := $$(find . -name '*.go' -type f | grep -vE 'tidb/')
 
 unit_test:
 	$(GOTEST) $(PACKAGES)
+
+build_unit_test:
+	$(GOTEST) $(PACKAGES) -c
 
 tools_setup:
 	@echo "setup build and check tools"

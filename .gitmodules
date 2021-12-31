@@ -1,0 +1,3 @@
+[submodule "tidb"]
+	path = tidb
+	url = git@github.com:liuzix/tidb.git
