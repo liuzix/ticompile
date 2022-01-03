@@ -20,14 +20,16 @@ type CodeGenContext interface {
 	Loop(limit value.Value) *LoopCodeGenContext
 	RelocateInputIdx(placeholder string) (idx int)
 	InputReader() *ChunkReader
+	OutputWriter() *ColumnWriter
 }
 
 type BaseCodeGenContext struct {
-	module      *ir.Module
-	MainFunc    *ir.Func
-	block       *ir.Block
-	param       value.Value
-	inputReader *ChunkReader
+	module       *ir.Module
+	MainFunc     *ir.Func
+	block        *ir.Block
+	param        value.Value
+	inputReader  *ChunkReader
+	outputWriter *ColumnWriter
 
 	InputIdxMap map[string]int
 }
@@ -56,6 +58,9 @@ func NewCodeGenContextWithChunkReader() *BaseCodeGenContext {
 	ctx := NewCodeGenContext("")
 	chunkReader := NewChunkReader()
 	ctx.inputReader = chunkReader
+
+	columnWriter := NewColumnWriter(ctx)
+	ctx.outputWriter = columnWriter
 	return ctx
 }
 
@@ -84,6 +89,10 @@ func (c *BaseCodeGenContext) RelocateInputIdx(placeholder string) (idx int) {
 
 func (c *BaseCodeGenContext) InputReader() *ChunkReader {
 	return c.inputReader
+}
+
+func (c *BaseCodeGenContext) OutputWriter() *ColumnWriter {
+	return c.outputWriter
 }
 
 type LoopCodeGenContext struct {

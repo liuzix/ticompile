@@ -13,7 +13,7 @@ type ColumnWriter struct {
 // NewColumnWriter returns a new ColumnWriter.
 // TODO be compatible with variable sized columns.
 func NewColumnWriter(ctx CodeGenContext) *ColumnWriter {
-	idxConst := constant.NewInt(irTypes.I64, 0)
+	idxConst := constant.NewInt(irTypes.I64, 1)
 	colPtrPtr := ctx.Block().NewGetElementPtr(columnPointerType, ctx.Param(), idxConst)
 	colPtr := ctx.Block().NewLoad(columnPointerType, colPtrPtr)
 

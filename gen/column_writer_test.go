@@ -39,6 +39,7 @@ func TestColumnWriterPutInt64(t *testing.T) {
 
 	col.ResizeInt64(1024, true)
 	inputVec := []uintptr{
+		0, // limit
 		uintptr(unsafe.Pointer(&col.Int64s()[0])),
 	}
 	inputParam := uintptr(unsafe.Pointer(&inputVec[0]))

@@ -33,6 +33,8 @@ func (c *ColNode) Compile(ctx gen.CodeGenContext) value.Value {
 	var colIdx int
 	if c.colIdx != nil {
 		colIdx = *c.colIdx
+	} else {
+		colIdx = ctx.RelocateInputIdx(c.colIdxPlaceholder)
 	}
 
 	loopCtx, ok := ctx.(*gen.LoopCodeGenContext)

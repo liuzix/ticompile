@@ -15,15 +15,16 @@ func NewChunkReader() *ChunkReader {
 }
 
 const (
-	inputLimitIdx     = 1
+	inputLimitIdx     = 0
 	inputColIdxOffset = 2
 )
 
 func (r *ChunkReader) GetLimit(ctx CodeGenContext) value.Value {
 	idxConst := constant.NewInt(irTypes.I64, int64(inputLimitIdx))
-	limitPtr := ctx.Block().NewGetElementPtr(irTypes.I64, ctx.Param(), idxConst)
-	limit := ctx.Block().NewLoad(irTypes.I64, limitPtr)
-	return limit
+	limitPtr := ctx.Block().NewGetElementPtr(irTypes.NewPointer(irTypes.I64), ctx.Param(), idxConst)
+	limit := ctx.Block().NewLoad(irTypes.NewPointer(irTypes.I64), limitPtr)
+	realLimit := ctx.Block().NewPtrToInt(limit, irTypes.I64)
+	return realLimit
 }
 
 func (r *ChunkReader) ReadInt64(ctx CodeGenContext, colID int, rowID value.Value) value.Value {

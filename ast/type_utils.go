@@ -12,6 +12,6 @@ func IRTypeFromEvalType(tp types.EvalType) irTypes.Type {
 	case types.ETReal:
 		return irTypes.Float
 	default:
-		panic("implement me")
+		return nil
 	}
 }
