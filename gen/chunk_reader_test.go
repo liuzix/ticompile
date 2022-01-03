@@ -23,7 +23,7 @@ func TestReadInt64FromChunk(t *testing.T) {
 	}
 
 	codeGenCtx := NewCodeGenContext("")
-	chunkReader := NewChunkReader(codeGenCtx, chunkTypes)
+	chunkReader := NewChunkReader()
 
 	val := chunkReader.ReadInt64(codeGenCtx, 0, constant.NewInt(irTypes.I64, 50))
 	codeGenCtx.Block().NewRet(val)
@@ -34,6 +34,7 @@ func TestReadInt64FromChunk(t *testing.T) {
 	fn := compile.LLVMCompileIR([]byte(asmText))
 
 	inputVec := []uintptr{
+		0,
 		0,
 		uintptr(unsafe.Pointer(&inputChunk.Column(0).Int64s()[0])),
 	}

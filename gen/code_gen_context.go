@@ -18,13 +18,18 @@ type CodeGenContext interface {
 	SetBlock(block *ir.Block)
 	Param() value.Value
 	Loop(limit value.Value) *LoopCodeGenContext
+	RelocateInputIdx(placeholder string) (idx int)
+	InputReader() *ChunkReader
 }
 
 type BaseCodeGenContext struct {
-	module   *ir.Module
-	MainFunc *ir.Func
-	block    *ir.Block
-	param    value.Value
+	module      *ir.Module
+	MainFunc    *ir.Func
+	block       *ir.Block
+	param       value.Value
+	inputReader *ChunkReader
+
+	InputIdxMap map[string]int
 }
 
 func NewCodeGenContext(blockName string) *BaseCodeGenContext {
@@ -38,12 +43,20 @@ func NewCodeGenContext(blockName string) *BaseCodeGenContext {
 		inputParam)
 	block := mainFunc.NewBlock(blockName)
 
-	return &BaseCodeGenContext{
+	ret := &BaseCodeGenContext{
 		module:   module,
 		MainFunc: mainFunc,
 		block:    block,
 		param:    inputParam,
 	}
+	return ret
+}
+
+func NewCodeGenContextWithChunkReader() *BaseCodeGenContext {
+	ctx := NewCodeGenContext("")
+	chunkReader := NewChunkReader()
+	ctx.inputReader = chunkReader
+	return ctx
 }
 
 func (c *BaseCodeGenContext) Module() *ir.Module {
@@ -60,6 +73,17 @@ func (c *BaseCodeGenContext) SetBlock(block *ir.Block) {
 
 func (c *BaseCodeGenContext) Param() value.Value {
 	return c.param
+}
+
+func (c *BaseCodeGenContext) RelocateInputIdx(placeholder string) (idx int) {
+	if index, ok := c.InputIdxMap[placeholder]; ok {
+		return index
+	}
+	return -1
+}
+
+func (c *BaseCodeGenContext) InputReader() *ChunkReader {
+	return c.inputReader
 }
 
 type LoopCodeGenContext struct {

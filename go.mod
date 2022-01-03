@@ -6,14 +6,15 @@ require (
 	github.com/llir/llvm v0.3.4
 	github.com/pingcap/errors v0.11.5-0.20211224045212-9687c2b0f87c
 	github.com/pingcap/log v0.0.0-20211215031037-e024ba4eb0ee
-	github.com/pingcap/tidb v0.0.0-00010101000000-000000000000
-	github.com/pingcap/tidb/parser v0.0.0-20211011031125-9b13dc409c5e
+	github.com/pingcap/tidb v0.0.0-unpublished
+	github.com/pingcap/tidb/parser v0.0.0-unpublished
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.19.1
 )
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
+	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
@@ -26,9 +27,9 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0 // indirect
-	github.com/kr/pretty v0.3.0 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/mewmew/float v0.0.0-20201204173432-505706aa38fa // indirect
+	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/opentracing/basictracer-go v1.0.0 // indirect
 	github.com/opentracing/opentracing-go v1.1.0 // indirect
 	github.com/pingcap/failpoint v0.0.0-20210316064728-7acb0f0a3dfd // indirect
@@ -41,7 +42,6 @@ require (
 	github.com/prometheus/common v0.9.1 // indirect
 	github.com/prometheus/procfs v0.0.8 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
-	github.com/rogpeppe/go-internal v1.8.1 // indirect
 	github.com/shirou/gopsutil v3.21.3+incompatible // indirect
 	github.com/tikv/client-go/v2 v2.0.0-rc.0.20211229051614-62d6b4a2e8f7 // indirect
 	github.com/tikv/pd v1.1.0-beta.0.20211118054146-02848d2660ee // indirect
@@ -60,11 +60,13 @@ require (
 	google.golang.org/genproto v0.0.0-20210825212027-de86158e7fda // indirect
 	google.golang.org/grpc v1.40.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
+	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
 
 replace (
+	github.com/liuzix/ticompile => ./
 	github.com/pingcap/tidb => ./tidb
 	github.com/pingcap/tidb/parser => ./tidb/parser
 )
