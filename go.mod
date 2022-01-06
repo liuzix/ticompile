@@ -26,6 +26,7 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0 // indirect
+	github.com/llir/ll v0.0.0-20210719001141-246f2b6b1fa9 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/mewmew/float v0.0.0-20201204173432-505706aa38fa // indirect
 	github.com/opentracing/basictracer-go v1.0.0 // indirect
