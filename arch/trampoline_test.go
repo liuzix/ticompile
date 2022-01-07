@@ -1,4 +1,4 @@
-package compile
+package arch
 
 import (
 	"testing"
@@ -20,7 +20,8 @@ func TestCallTrampoline(t *testing.T) {
 	rawPtr, err := targetFunc.RawFuncPtr()
 	require.NoError(t, err)
 
-	result := CallCGOTrampoline(rawPtr, 2)
+	result := CallWithArg(rawPtr, 2)
+	require.NoError(t, err)
 	require.Equal(t, uintptr(3), result)
 }
 
@@ -33,7 +34,7 @@ func BenchmarkCallTrampoline(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		result := CallCGOTrampoline(rawPtr, 2)
+		result := CallWithArg(rawPtr, 2)
 		if result != 3 {
 			b.FailNow()
 		}

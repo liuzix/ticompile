@@ -15,23 +15,24 @@ var decimalIRCode []byte
 
 var (
 	DecimalModule *ir.Module
-	DecimalType = irTypes.NewStruct(irTypes.I8, irTypes.I8, irTypes.I8, irTypes.I1, irTypes.NewArray(9, irTypes.I32))
+	DecimalType irTypes.Type
 	DecimalMulFunction *ir.Func
 )
 
 const (
-	decimalMulFuncName = "main.DecimalMul"
+	decimalMulFuncName = "DecimalMul"
+	decimalType = "MyDecimal"
 )
-
 
 func init() {
 	var err error
 	DecimalModule, err = asm.ParseBytes("", decimalIRCode)
 	if err != nil {
-		log.Panic("failed to parse LLVM file decimal.ll")
+		log.Panic("failed to parse LLVM file decimal.ll", zap.Error(err))
 	}
-
 	DecimalMulFunction = findDecimalMulFunction()
+	DecimalType = findDecimalType()
+
 }
 
 func findDecimalMulFunction() *ir.Func {
@@ -43,5 +44,17 @@ func findDecimalMulFunction() *ir.Func {
 	log.Panic(
 		"function not found",
 		zap.String("func-name", decimalMulFuncName))
+	panic("unreachable")
+}
+
+func findDecimalType() irTypes.Type {
+	for _, tp := range DecimalModule.TypeDefs {
+		if tp.Name() == decimalType {
+			return tp
+		}
+	}
+	log.Panic(
+		"function not found",
+		zap.String("func-name", decimalType))
 	panic("unreachable")
 }

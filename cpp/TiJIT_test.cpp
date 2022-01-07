@@ -24,7 +24,8 @@ TEST(TestTiJIT, TestTiJITBasics)
     auto module = makeModuleFromMemoryBuffer(context, buf->getMemBufferRef());
     EXPECT_TRUE(!!module);
 
-    module->setDataLayout(jit->getDataLayout());
+    auto layout = jit->getDataLayout();
+    module->setDataLayout(layout);
     auto jitMain = module->getFunction("jit_main");
 
     const std::string freshName = generateFreshJITSymbolName();

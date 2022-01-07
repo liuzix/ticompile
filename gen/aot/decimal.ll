@@ -1,38 +1,38 @@
-%main.MyDecimal = type { i8, i8, i8, i1, [9 x i32] }
+%MyDecimal = type <{ i8, i8, i8, i1, [9 x i32] }>
 
-@main.div9 = internal constant [128 x i64] [i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 14, i64 14], align 8
-@main.powers10 = internal constant [10 x i32] [i32 1, i32 10, i32 100, i32 1000, i32 10000, i32 100000, i32 1000000, i32 10000000, i32 100000000, i32 1000000000], align 4
-@main.wordBufLen = internal constant i64 9, align 8
-@main.zeroMyDecimal = internal global %main.MyDecimal zeroinitializer, align 4
+@div9 = internal constant [128 x i64] [i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 0, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 1, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 2, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 3, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 4, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 5, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 6, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 7, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 8, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 9, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 10, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 11, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 12, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 13, i64 14, i64 14], align 8
+@powers10 = internal constant [10 x i32] [i32 1, i32 10, i32 100, i32 1000, i32 10000, i32 100000, i32 1000000, i32 10000000, i32 100000000, i32 1000000000], align 4
+@wordBufLen = internal constant i64 9, align 8
+@zeroMyDecimal = internal global %MyDecimal zeroinitializer, align 4
 
-define internal %main.MyDecimal @main.zeroMyDecimalWithFrac(i8 %frac, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal %MyDecimal @zeroMyDecimalWithFrac(i8 %frac) unnamed_addr #0  {
 entry:
-  %zero = alloca %main.MyDecimal, align 8
-  %.fca.0.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 0
+  %zero = alloca %MyDecimal, align 8
+  %.fca.0.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 0
   store i8 0, i8* %.fca.0.gep, align 4
-  %.fca.1.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 1
+  %.fca.1.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 1
   store i8 0, i8* %.fca.1.gep, align 1
-  %.fca.2.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 2
+  %.fca.2.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 2
   store i8 0, i8* %.fca.2.gep, align 2
-  %.fca.3.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 3
+  %.fca.3.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 3
   store i1 false, i1* %.fca.3.gep, align 1
-  %.fca.4.0.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 0
+  %.fca.4.0.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 0
   store i32 0, i32* %.fca.4.0.gep, align 4
-  %.fca.4.1.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 1
+  %.fca.4.1.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 1
   store i32 0, i32* %.fca.4.1.gep, align 4
-  %.fca.4.2.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 2
+  %.fca.4.2.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 2
   store i32 0, i32* %.fca.4.2.gep, align 4
-  %.fca.4.3.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 3
+  %.fca.4.3.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 3
   store i32 0, i32* %.fca.4.3.gep, align 4
-  %.fca.4.4.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 4
+  %.fca.4.4.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 4
   store i32 0, i32* %.fca.4.4.gep, align 4
-  %.fca.4.5.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 5
+  %.fca.4.5.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 5
   store i32 0, i32* %.fca.4.5.gep, align 4
-  %.fca.4.6.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 6
+  %.fca.4.6.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 6
   store i32 0, i32* %.fca.4.6.gep, align 4
-  %.fca.4.7.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 7
+  %.fca.4.7.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 7
   store i32 0, i32* %.fca.4.7.gep, align 4
-  %.fca.4.8.gep = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %zero, i32 0, i32 4, i32 8
+  %.fca.4.8.gep = getelementptr inbounds %MyDecimal, %MyDecimal* %zero, i32 0, i32 4, i32 8
   store i32 0, i32* %.fca.4.8.gep, align 4
   br i1 false, label %store.throw, label %store.next
 
@@ -49,35 +49,35 @@ store.throw1:                                     ; preds = %store.next
 store.next2:                                      ; preds = %store.next
   store i8 %frac, i8* %.fca.2.gep, align 1
   %.fca.0.load = load i8, i8* %.fca.0.gep, align 4
-  %.fca.0.insert = insertvalue %main.MyDecimal undef, i8 %.fca.0.load, 0
+  %.fca.0.insert = insertvalue %MyDecimal undef, i8 %.fca.0.load, 0
   %.fca.1.load = load i8, i8* %.fca.1.gep, align 1
-  %.fca.1.insert = insertvalue %main.MyDecimal %.fca.0.insert, i8 %.fca.1.load, 1
-  %.fca.2.insert = insertvalue %main.MyDecimal %.fca.1.insert, i8 %frac, 2
+  %.fca.1.insert = insertvalue %MyDecimal %.fca.0.insert, i8 %.fca.1.load, 1
+  %.fca.2.insert = insertvalue %MyDecimal %.fca.1.insert, i8 %frac, 2
   %.fca.3.load = load i1, i1* %.fca.3.gep, align 1
-  %.fca.3.insert = insertvalue %main.MyDecimal %.fca.2.insert, i1 %.fca.3.load, 3
+  %.fca.3.insert = insertvalue %MyDecimal %.fca.2.insert, i1 %.fca.3.load, 3
   %.fca.4.0.load = load i32, i32* %.fca.4.0.gep, align 4
-  %.fca.4.0.insert = insertvalue %main.MyDecimal %.fca.3.insert, i32 %.fca.4.0.load, 4, 0
+  %.fca.4.0.insert = insertvalue %MyDecimal %.fca.3.insert, i32 %.fca.4.0.load, 4, 0
   %.fca.4.1.load = load i32, i32* %.fca.4.1.gep, align 4
-  %.fca.4.1.insert = insertvalue %main.MyDecimal %.fca.4.0.insert, i32 %.fca.4.1.load, 4, 1
+  %.fca.4.1.insert = insertvalue %MyDecimal %.fca.4.0.insert, i32 %.fca.4.1.load, 4, 1
   %.fca.4.2.load = load i32, i32* %.fca.4.2.gep, align 4
-  %.fca.4.2.insert = insertvalue %main.MyDecimal %.fca.4.1.insert, i32 %.fca.4.2.load, 4, 2
+  %.fca.4.2.insert = insertvalue %MyDecimal %.fca.4.1.insert, i32 %.fca.4.2.load, 4, 2
   %.fca.4.3.load = load i32, i32* %.fca.4.3.gep, align 4
-  %.fca.4.3.insert = insertvalue %main.MyDecimal %.fca.4.2.insert, i32 %.fca.4.3.load, 4, 3
+  %.fca.4.3.insert = insertvalue %MyDecimal %.fca.4.2.insert, i32 %.fca.4.3.load, 4, 3
   %.fca.4.4.load = load i32, i32* %.fca.4.4.gep, align 4
-  %.fca.4.4.insert = insertvalue %main.MyDecimal %.fca.4.3.insert, i32 %.fca.4.4.load, 4, 4
+  %.fca.4.4.insert = insertvalue %MyDecimal %.fca.4.3.insert, i32 %.fca.4.4.load, 4, 4
   %.fca.4.5.load = load i32, i32* %.fca.4.5.gep, align 4
-  %.fca.4.5.insert = insertvalue %main.MyDecimal %.fca.4.4.insert, i32 %.fca.4.5.load, 4, 5
+  %.fca.4.5.insert = insertvalue %MyDecimal %.fca.4.4.insert, i32 %.fca.4.5.load, 4, 5
   %.fca.4.6.load = load i32, i32* %.fca.4.6.gep, align 4
-  %.fca.4.6.insert = insertvalue %main.MyDecimal %.fca.4.5.insert, i32 %.fca.4.6.load, 4, 6
+  %.fca.4.6.insert = insertvalue %MyDecimal %.fca.4.5.insert, i32 %.fca.4.6.load, 4, 6
   %.fca.4.7.load = load i32, i32* %.fca.4.7.gep, align 4
-  %.fca.4.7.insert = insertvalue %main.MyDecimal %.fca.4.6.insert, i32 %.fca.4.7.load, 4, 7
+  %.fca.4.7.insert = insertvalue %MyDecimal %.fca.4.6.insert, i32 %.fca.4.7.load, 4, 7
   %.fca.4.8.load = load i32, i32* %.fca.4.8.gep, align 4
-  %.fca.4.8.insert = insertvalue %main.MyDecimal %.fca.4.7.insert, i32 %.fca.4.8.load, 4, 8
-  ret %main.MyDecimal %.fca.4.8.insert
+  %.fca.4.8.insert = insertvalue %MyDecimal %.fca.4.7.insert, i32 %.fca.4.8.load, 4, 8
+  ret %MyDecimal %.fca.4.8.insert
 }
 
 
-define internal { i32, i32 } @main.add(i32 %a, i32 %b, i32 %carry, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal { i32, i32 } @add(i32 %a, i32 %b, i32 %carry) unnamed_addr #0  {
 entry:
   %0 = add i32 %a, %b
   %1 = add i32 %0, %carry
@@ -91,7 +91,7 @@ entry:
 }
 
 ; Function Attrs: nounwind optsize uwtable
-define internal { i32, i32 } @main.add2(i32 %a, i32 %b, i32 %carry, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal { i32, i32 } @add2(i32 %a, i32 %b, i32 %carry) unnamed_addr #0  {
 entry:
   %0 = sext i32 %a to i64
   %1 = sext i32 %b to i64
@@ -113,7 +113,7 @@ entry:
   ret { i32, i32 } %16
 }
 
-define internal i64 @main.digitsToWords(i64 %digits, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal i64 @digitsToWords(i64 %digits) unnamed_addr #0  {
 entry:
   %0 = add i64 %digits, 9
   %1 = sub i64 %0, 1
@@ -137,15 +137,15 @@ lookup.throw:                                     ; preds = %if.then
   unreachable
 
 lookup.next:                                      ; preds = %if.then
-  %7 = getelementptr inbounds [128 x i64], [128 x i64]* @main.div9, i32 0, i64 %1
+  %7 = getelementptr inbounds [128 x i64], [128 x i64]* @div9, i32 0, i64 %1
   %8 = load i64, i64* %7, align 8
   ret i64 %8
 }
 
-define internal { i64, i64, i32 } @main.fixWordCntError(i64 %wordsInt, i64 %wordsFrac, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal { i64, i64, i32 } @fixWordCntError(i64 %wordsInt, i64 %wordsFrac) unnamed_addr #0  {
 entry:
   %0 = add i64 %wordsInt, %wordsFrac
-  %1 = load i64, i64* @main.wordBufLen, align 8
+  %1 = load i64, i64* @wordBufLen, align 8
   %2 = icmp sgt i64 %0, %1
   br i1 %2, label %if.then, label %if.done2
 
@@ -174,7 +174,7 @@ if.done2:                                         ; preds = %entry
 }
 
 ; Function Attrs: nounwind optsize uwtable
-define internal i64 @main.countLeadingZeroes(i64 %i, i32 %word, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal i64 @countLeadingZeroes(i64 %i, i32 %word) unnamed_addr #0  {
 entry:
   br label %for.loop
 
@@ -196,13 +196,13 @@ lookup.throw:                                     ; preds = %for.loop
   unreachable
 
 lookup.next:                                      ; preds = %for.loop
-  %5 = getelementptr inbounds [10 x i32], [10 x i32]* @main.powers10, i32 0, i64 %0
+  %5 = getelementptr inbounds [10 x i32], [10 x i32]* @powers10, i32 0, i64 %0
   %6 = load i32, i32* %5, align 4
   %7 = icmp slt i32 %word, %6
   br i1 %7, label %for.body, label %for.done
 }
 
-define internal i8 @main.myMinInt8(i8 %a, i8 %b, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal i8 @myMinInt8(i8 %a, i8 %b) unnamed_addr #0  {
 entry:
   %0 = icmp slt i8 %a, %b
   %spec.select = select i1 %0, i8 %a, i8 %b
@@ -210,9 +210,9 @@ entry:
 }
 
 
-define internal i32 @main.DecimalMul(%main.MyDecimal* dereferenceable_or_null(40) %from1, %main.MyDecimal* dereferenceable_or_null(40) %from2, %main.MyDecimal* dereferenceable_or_null(40) %to, i8* %context, i8* %parentHandle) unnamed_addr #0  {
+define internal i32 @DecimalMul(%MyDecimal* dereferenceable_or_null(40) %from1, %MyDecimal* dereferenceable_or_null(40) %from2, %MyDecimal* dereferenceable_or_null(40) %to) unnamed_addr #0  {
 entry:
-  %0 = icmp eq %main.MyDecimal* %from1, null
+  %0 = icmp eq %MyDecimal* %from1, null
   br i1 %0, label %gep.throw, label %gep.next
 
 if.then:                                          ; preds = %deref.next93
@@ -378,7 +378,7 @@ gep.throw:                                        ; preds = %entry
   unreachable
 
 gep.next:                                         ; preds = %entry
-  %51 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from1, i32 0, i32 0
+  %51 = getelementptr inbounds %MyDecimal, %MyDecimal* %from1, i32 0, i32 0
   br i1 false, label %deref.throw, label %deref.next
 
 deref.throw:                                      ; preds = %gep.next
@@ -387,14 +387,14 @@ deref.throw:                                      ; preds = %gep.next
 deref.next:                                       ; preds = %gep.next
   %52 = load i8, i8* %51, align 1
   %53 = sext i8 %52 to i64
-  %54 = call i64 @main.digitsToWords(i64 %53, i8* undef, i8* undef)
+  %54 = call i64 @digitsToWords(i64 %53)
   br i1 false, label %gep.throw36, label %gep.next37
 
 gep.throw36:                                      ; preds = %deref.next
   unreachable
 
 gep.next37:                                       ; preds = %deref.next
-  %55 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from1, i32 0, i32 1
+  %55 = getelementptr inbounds %MyDecimal, %MyDecimal* %from1, i32 0, i32 1
   br i1 false, label %deref.throw38, label %deref.next39
 
 deref.throw38:                                    ; preds = %gep.next37
@@ -403,15 +403,15 @@ deref.throw38:                                    ; preds = %gep.next37
 deref.next39:                                     ; preds = %gep.next37
   %56 = load i8, i8* %55, align 1
   %57 = sext i8 %56 to i64
-  %58 = call i64 @main.digitsToWords(i64 %57, i8* undef, i8* undef)
-  %59 = icmp eq %main.MyDecimal* %from2, null
+  %58 = call i64 @digitsToWords(i64 %57)
+  %59 = icmp eq %MyDecimal* %from2, null
   br i1 %59, label %gep.throw40, label %gep.next41
 
 gep.throw40:                                      ; preds = %deref.next39
   unreachable
 
 gep.next41:                                       ; preds = %deref.next39
-  %60 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from2, i32 0, i32 0
+  %60 = getelementptr inbounds %MyDecimal, %MyDecimal* %from2, i32 0, i32 0
   br i1 false, label %deref.throw42, label %deref.next43
 
 deref.throw42:                                    ; preds = %gep.next41
@@ -420,14 +420,14 @@ deref.throw42:                                    ; preds = %gep.next41
 deref.next43:                                     ; preds = %gep.next41
   %61 = load i8, i8* %60, align 1
   %62 = sext i8 %61 to i64
-  %63 = call i64 @main.digitsToWords(i64 %62, i8* undef, i8* undef)
+  %63 = call i64 @digitsToWords(i64 %62)
   br i1 false, label %gep.throw44, label %gep.next45
 
 gep.throw44:                                      ; preds = %deref.next43
   unreachable
 
 gep.next45:                                       ; preds = %deref.next43
-  %64 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from2, i32 0, i32 1
+  %64 = getelementptr inbounds %MyDecimal, %MyDecimal* %from2, i32 0, i32 1
   br i1 false, label %deref.throw46, label %deref.next47
 
 deref.throw46:                                    ; preds = %gep.next45
@@ -436,7 +436,7 @@ deref.throw46:                                    ; preds = %gep.next45
 deref.next47:                                     ; preds = %gep.next45
   %65 = load i8, i8* %64, align 1
   %66 = sext i8 %65 to i64
-  %67 = call i64 @main.digitsToWords(i64 %66, i8* undef, i8* undef)
+  %67 = call i64 @digitsToWords(i64 %66)
   br i1 false, label %gep.throw48, label %gep.next49
 
 gep.throw48:                                      ; preds = %deref.next47
@@ -466,23 +466,23 @@ deref.next55:                                     ; preds = %gep.next53
   %70 = load i8, i8* %60, align 1
   %71 = sext i8 %70 to i64
   %72 = add i64 %69, %71
-  %73 = call i64 @main.digitsToWords(i64 %72, i8* undef, i8* undef)
+  %73 = call i64 @digitsToWords(i64 %72)
   %74 = add i64 %58, %67
-  %75 = icmp eq %main.MyDecimal* %to, null
+  %75 = icmp eq %MyDecimal* %to, null
   br i1 %75, label %gep.throw56, label %gep.next57
 
 gep.throw56:                                      ; preds = %deref.next55
   unreachable
 
 gep.next57:                                       ; preds = %deref.next55
-  %76 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %to, i32 0, i32 2
+  %76 = getelementptr inbounds %MyDecimal, %MyDecimal* %to, i32 0, i32 2
   br i1 false, label %gep.throw58, label %gep.next59
 
 gep.throw58:                                      ; preds = %gep.next57
   unreachable
 
 gep.next59:                                       ; preds = %gep.next57
-  %77 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from1, i32 0, i32 2
+  %77 = getelementptr inbounds %MyDecimal, %MyDecimal* %from1, i32 0, i32 2
   br i1 false, label %deref.throw60, label %deref.next61
 
 deref.throw60:                                    ; preds = %gep.next59
@@ -496,7 +496,7 @@ gep.throw62:                                      ; preds = %deref.next61
   unreachable
 
 gep.next63:                                       ; preds = %deref.next61
-  %79 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from2, i32 0, i32 2
+  %79 = getelementptr inbounds %MyDecimal, %MyDecimal* %from2, i32 0, i32 2
   br i1 false, label %deref.throw64, label %deref.next65
 
 deref.throw64:                                    ; preds = %gep.next63
@@ -505,7 +505,7 @@ deref.throw64:                                    ; preds = %gep.next63
 deref.next65:                                     ; preds = %gep.next63
   %80 = load i8, i8* %79, align 1
   %81 = add i8 %78, %80
-  %82 = call i8 @main.myMinInt8(i8 %81, i8 30, i8* undef, i8* undef)
+  %82 = call i8 @myMinInt8(i8 %81, i8 30)
   br i1 false, label %store.throw, label %store.next
 
 store.throw:                                      ; preds = %deref.next65
@@ -513,7 +513,7 @@ store.throw:                                      ; preds = %deref.next65
 
 store.next:                                       ; preds = %deref.next65
   store i8 %82, i8* %76, align 1
-  %83 = call { i64, i64, i32 } @main.fixWordCntError(i64 %73, i64 %74, i8* undef, i8* undef)
+  %83 = call { i64, i64, i32 } @fixWordCntError(i64 %73, i64 %74)
   %84 = extractvalue { i64, i64, i32 } %83, 0
   %85 = extractvalue { i64, i64, i32 } %83, 1
   %86 = extractvalue { i64, i64, i32 } %83, 2
@@ -523,14 +523,14 @@ gep.throw66:                                      ; preds = %store.next
   unreachable
 
 gep.next67:                                       ; preds = %store.next
-  %87 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %to, i32 0, i32 3
+  %87 = getelementptr inbounds %MyDecimal, %MyDecimal* %to, i32 0, i32 3
   br i1 false, label %gep.throw68, label %gep.next69
 
 gep.throw68:                                      ; preds = %gep.next67
   unreachable
 
 gep.next69:                                       ; preds = %gep.next67
-  %88 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from1, i32 0, i32 3
+  %88 = getelementptr inbounds %MyDecimal, %MyDecimal* %from1, i32 0, i32 3
   br i1 false, label %deref.throw70, label %deref.next71
 
 deref.throw70:                                    ; preds = %gep.next69
@@ -544,7 +544,7 @@ gep.throw72:                                      ; preds = %deref.next71
   unreachable
 
 gep.next73:                                       ; preds = %deref.next71
-  %90 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from2, i32 0, i32 3
+  %90 = getelementptr inbounds %MyDecimal, %MyDecimal* %from2, i32 0, i32 3
   br i1 false, label %deref.throw74, label %deref.next75
 
 deref.throw74:                                    ; preds = %gep.next73
@@ -566,7 +566,7 @@ gep.throw78:                                      ; preds = %store.next77
   unreachable
 
 gep.next79:                                       ; preds = %store.next77
-  %93 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %to, i32 0, i32 1
+  %93 = getelementptr inbounds %MyDecimal, %MyDecimal* %to, i32 0, i32 1
   br i1 false, label %gep.throw80, label %gep.next81
 
 gep.throw80:                                      ; preds = %gep.next79
@@ -633,7 +633,7 @@ gep.throw98:                                      ; preds = %if.done
   unreachable
 
 gep.next99:                                       ; preds = %if.done
-  %98 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %to, i32 0, i32 0
+  %98 = getelementptr inbounds %MyDecimal, %MyDecimal* %to, i32 0, i32 0
   %99 = mul i64 %84, 9
   %100 = trunc i64 %99 to i8
   %101 = icmp eq i8* %98, null
@@ -709,8 +709,8 @@ gep.throw118:                                     ; preds = %if.done11
   unreachable
 
 gep.next119:                                      ; preds = %if.done11
-  %108 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %to, i32 0, i32 4
-  %109 = load [9 x i32], [9 x i32]* getelementptr inbounds (%main.MyDecimal, %main.MyDecimal* @main.zeroMyDecimal, i32 0, i32 4), align 4
+  %108 = getelementptr inbounds %MyDecimal, %MyDecimal* %to, i32 0, i32 4
+  %109 = load [9 x i32], [9 x i32]* getelementptr inbounds (%MyDecimal, %MyDecimal* @zeroMyDecimal, i32 0, i32 4), align 4
   br i1 false, label %store.throw120, label %store.next121
 
 store.throw120:                                   ; preds = %gep.next119
@@ -726,7 +726,7 @@ gep.throw122:                                     ; preds = %for.body13
   unreachable
 
 gep.next123:                                      ; preds = %for.body13
-  %112 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from1, i32 0, i32 4
+  %112 = getelementptr inbounds %MyDecimal, %MyDecimal* %from1, i32 0, i32 4
   br i1 false, label %gep.throw124, label %gep.next125
 
 gep.throw124:                                     ; preds = %gep.next123
@@ -749,7 +749,7 @@ gep.throw126:                                     ; preds = %lookup.next
   unreachable
 
 gep.next127:                                      ; preds = %lookup.next
-  %117 = getelementptr inbounds %main.MyDecimal, %main.MyDecimal* %from2, i32 0, i32 4
+  %117 = getelementptr inbounds %MyDecimal, %MyDecimal* %from2, i32 0, i32 4
   br i1 false, label %gep.throw128, label %gep.next129
 
 gep.throw128:                                     ; preds = %gep.next127
@@ -813,7 +813,7 @@ lookup.throw142:                                  ; preds = %gep.next141
 
 lookup.next143:                                   ; preds = %gep.next141
   %132 = load i32, i32* %131, align 4
-  %133 = call { i32, i32 } @main.add2(i32 %132, i32 %129, i32 %28, i8* undef, i8* undef)
+  %133 = call { i32, i32 } @add2(i32 %132, i32 %129, i32 %28)
   %134 = extractvalue { i32, i32 } %133, 0
   store i32 %134, i32* %131, align 4
   %135 = extractvalue { i32, i32 } %133, 1
@@ -859,7 +859,7 @@ lookup.throw154:                                  ; preds = %gep.next153
 
 lookup.next155:                                   ; preds = %gep.next153
   %141 = load i32, i32* %140, align 4
-  %142 = call { i32, i32 } @main.add2(i32 %141, i32 0, i32 %28, i8* undef, i8* undef)
+  %142 = call { i32, i32 } @add2(i32 %141, i32 0, i32 %28)
   %143 = extractvalue { i32, i32 } %142, 0
   store i32 %143, i32* %140, align 4
   %144 = extractvalue { i32, i32 } %142, 1
@@ -902,7 +902,7 @@ lookup.throw166:                                  ; preds = %gep.next165
 
 lookup.next167:                                   ; preds = %gep.next165
   %147 = load i32, i32* %146, align 4
-  %148 = call { i32, i32 } @main.add(i32 %147, i32 0, i32 %35, i8* undef, i8* undef)
+  %148 = call { i32, i32 } @add(i32 %147, i32 0, i32 %35)
   %149 = extractvalue { i32, i32 } %148, 0
   store i32 %149, i32* %146, align 4
   %150 = extractvalue { i32, i32 } %148, 1
@@ -955,14 +955,14 @@ deref.throw180:                                   ; preds = %gep.next179
 
 deref.next181:                                    ; preds = %gep.next179
   %157 = load i8, i8* %76, align 1
-  %158 = call %main.MyDecimal @main.zeroMyDecimalWithFrac(i8 %157, i8* undef, i8* undef)
+  %158 = call %MyDecimal @zeroMyDecimalWithFrac(i8 %157)
   br i1 false, label %store.throw182, label %store.next183
 
 store.throw182:                                   ; preds = %deref.next181
   unreachable
 
 store.next183:                                    ; preds = %deref.next181
-  store %main.MyDecimal %158, %main.MyDecimal* %to, align 4
+  store %MyDecimal %158, %MyDecimal* %to, align 4
   br label %if.done28
 
 gep.throw184:                                     ; preds = %if.done28
@@ -977,7 +977,7 @@ deref.throw186:                                   ; preds = %gep.next185
 deref.next187:                                    ; preds = %gep.next185
   %159 = load i8, i8* %93, align 1
   %160 = sext i8 %159 to i64
-  %161 = call i64 @main.digitsToWords(i64 %160, i8* undef, i8* undef)
+  %161 = call i64 @digitsToWords(i64 %160)
   %162 = add i64 %84, %161
   br label %for.loop29
 

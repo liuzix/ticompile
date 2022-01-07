@@ -12,7 +12,6 @@ import (
 	"unsafe"
 
 	"github.com/liuzix/ticompile/program"
-	"github.com/pingcap/errors"
 	"github.com/pingcap/log"
 	"go.uber.org/zap"
 )
@@ -28,13 +27,10 @@ func LLVMCompileIR(bitcode []byte) CompiledFunction {
 		log.Panic("compileLLVMIR failed",
 			zap.Binary("bitcode", bitcode))
 	}
-	log.Info("LLVM JIT returned function ptr", zap.Uintptr("ptr", rawFuncPtr))
+	log.Debug("LLVM JIT returned function ptr", zap.Uintptr("ptr", rawFuncPtr))
 
 	return func(arg program.Arg) (program.Result, error) {
-		result, err := CallTrampoline(rawFuncPtr, arg)
-		if err != nil {
-			return 0, errors.Trace(err)
-		}
+		result := CallCGOTrampoline(rawFuncPtr, arg)
 		return result, nil
 	}
 }
