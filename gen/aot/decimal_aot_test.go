@@ -12,4 +12,5 @@ func TestDecimalAotModuleLoaded(t *testing.T) {
 
 func TestDecimalMulFunctionFound(t *testing.T) {
 	require.Equal(t, decimalMulFuncName, DecimalMulFunction.Name())
+	require.Equal(t, decimalSubFuncName, DecimalSubFunction.Name())
 }

@@ -15,6 +15,7 @@ using namespace llvm;
 struct GlobalStates {
     std::unique_ptr<TiJIT> jit;
     ThreadSafeContext ctx;
+    std::mutex lock;
 
     GlobalStates()
         : ctx(std::make_unique<LLVMContext>())
@@ -32,6 +33,7 @@ struct GlobalStates {
 
 extern "C" void* compileLLVMIR(const char* ir, size_t len)
 {
+    const std::lock_guard<std::mutex> lock(global.lock);
     auto memBuf = makeMemoryBuffer(ir, len);
     auto module = makeModuleFromMemoryBuffer(*global.ctx.getContext(), memBuf->getMemBufferRef());
     module->setDataLayout(global.jit->getDataLayout());

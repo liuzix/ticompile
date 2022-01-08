@@ -86,7 +86,7 @@ func TestDecimalBinOp(t *testing.T) {
 }
 
 func TestDecimalMulLoop(t *testing.T) {
-	decimalMulLoop(174657)
+	decimalMulLoop(10000)
 }
 
 func decimalMulLoop(N int) {
@@ -120,7 +120,6 @@ func decimalMulLoop(N int) {
 
 	asmText := aot.DecimalModule.String()
 	asmText += codeGenCtx.Module().String()
-	log.Info("compiled IR", zap.String("asm", asmText))
 
 	input0 := unsafe.Pointer(&inputChunk.Column(2).Int64s()[0])
 	input1 := unsafe.Pointer(&inputChunk.Column(0).Int64s()[0])

@@ -1578,17 +1578,6 @@ func DecimalSub(from1, from2, to *MyDecimal) ErrNo {
 }
 
 func validateArgs(f1, f2, to *MyDecimal) (*MyDecimal, *MyDecimal, *MyDecimal) {
-	if to == nil {
-		return f1, f2, to
-	}
-	if f1 == to {
-		tmp := *f1
-		f1 = &tmp
-	}
-	if f2 == to {
-		tmp := *f2
-		f2 = &tmp
-	}
 	to.digitsFrac = 0
 	to.digitsInt = 0
 	to.resultFrac = 0

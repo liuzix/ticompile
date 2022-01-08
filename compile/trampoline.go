@@ -11,8 +11,6 @@ uint64_t CallCGOTrampoline(uint64_t ptr, uint64_t arg) {
 import "C"
 
 import (
-	"github.com/pingcap/log"
-	"go.uber.org/zap"
 	"runtime"
 
 	"github.com/liuzix/ticompile/program"
@@ -21,7 +19,6 @@ import (
 var trampoline = buildTrampoline()
 
 func CallCGOTrampoline(ptr, arg uintptr) uintptr{
-	log.Info("trampoline called", zap.Stack("stack"))
 	return uintptr(C.CallCGOTrampoline(C.ulong(ptr), C.ulong(arg)))
 }
 

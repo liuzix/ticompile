@@ -40,6 +40,8 @@ func (o *DecimalBinOp) Compile(ctx gen.CodeGenContext) value.Value {
 	switch o.Op {
 	case opcode.Mul:
 		return o.compileMul(ctx)
+	case opcode.Minus:
+		return o.compileMinus(ctx)
 	default:
 		panic("implement me")
 	}
@@ -51,6 +53,15 @@ func (o *DecimalBinOp) compileMul(ctx gen.CodeGenContext) value.Value {
 	stackVar := ctx.Block().NewAlloca(aot.DecimalType)
 	stackVar.Align = 4
 	ctx.Block().NewCall(aot.DecimalMulFunction, leftVal, rightVal, stackVar)
+	return stackVar
+}
+
+func (o *DecimalBinOp) compileMinus(ctx gen.CodeGenContext) value.Value {
+	leftVal := o.Left.Compile(ctx)
+	rightVal := o.Right.Compile(ctx)
+	stackVar := ctx.Block().NewAlloca(aot.DecimalType)
+	stackVar.Align = 4
+	ctx.Block().NewCall(aot.DecimalSubFunction, leftVal, rightVal, stackVar)
 	return stackVar
 }
 

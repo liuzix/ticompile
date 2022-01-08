@@ -10,17 +10,19 @@ import (
 	"go.uber.org/zap"
 )
 
-//go:embed decimal.ll
+//go:embed decimal_opt.ll
 var decimalIRCode []byte
 
 var (
 	DecimalModule *ir.Module
 	DecimalType irTypes.Type
 	DecimalMulFunction *ir.Func
+	DecimalSubFunction *ir.Func
 )
 
 const (
 	decimalMulFuncName = "DecimalMul"
+	decimalSubFuncName = "DecimalSub"
 	decimalType = "MyDecimal"
 )
 
@@ -31,6 +33,7 @@ func init() {
 		log.Panic("failed to parse LLVM file decimal.ll", zap.Error(err))
 	}
 	DecimalMulFunction = findDecimalMulFunction()
+	DecimalSubFunction = findDecimalSubFunction()
 	DecimalType = findDecimalType()
 
 }
@@ -44,6 +47,18 @@ func findDecimalMulFunction() *ir.Func {
 	log.Panic(
 		"function not found",
 		zap.String("func-name", decimalMulFuncName))
+	panic("unreachable")
+}
+
+func findDecimalSubFunction() *ir.Func {
+	for _, fn := range DecimalModule.Funcs {
+		if fn.Name() == decimalSubFuncName {
+			return fn
+		}
+	}
+	log.Panic(
+		"function not found",
+		zap.String("func-name", decimalSubFuncName))
 	panic("unreachable")
 }
 
